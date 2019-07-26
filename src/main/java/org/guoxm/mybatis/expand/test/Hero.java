@@ -13,8 +13,9 @@ import java.util.List;
  * @author guoxm
  */
 @Table(schema = "guoxm", name = "hero")
+@SuppressWarnings("all")
 public class Hero {
-    @Column
+    @Column(primaryKey = true, autoIncrement = true)
     private int id; // 编号
     @Column
     private String name; // 名称
@@ -25,9 +26,9 @@ public class Hero {
     @Column
     private int age; // 年龄
     @Column(type = PostgreSQLType.INTEGER)
-    private Six six; // 性别
+    private Sex sex; // 性别
     @Column
     private String birthplace; // 籍贯
-    @SubTable(name = "tests", joinColumns = {"id", "name"}, subClass = Test.class)
-    private List<Test> tests;
+    @SubTable(name = "skill", joinColumns = {"id", "name"}, subClass = Skill.class)
+    private List<Skill> skills; // 技能
 }

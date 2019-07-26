@@ -5,7 +5,7 @@ package org.guoxm.mybatis.expand.test;
  * Created on 2019/7/23.
  * @author guoxm
  */
-public enum Six {
+public enum Sex {
     BOG,
     GRIL
 }
