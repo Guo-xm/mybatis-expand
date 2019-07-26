@@ -51,6 +51,21 @@ Boolean，enum和自定义类型要求必须指定类型）。其使用方式如
 
 ![image](https://github.com/Guo-xm/mybatis-expand/blob/master/images/WeExpandMain.png)
 
+application.yml中的部分配置
+
+![image](https://github.com/Guo-xm/mybatis-expand/blob/master/images/spring-datasource.png)
+
+
+运行WeExpandMain后可以看到控制台的输出
+
+![image](https://github.com/Guo-xm/mybatis-expand/blob/master/images/control.png)
+
+
+然后看一下数据库中的表结构：
+
+![image](https://github.com/Guo-xm/mybatis-expand/blob/master/images/db.png)
+
+
 
 
 
