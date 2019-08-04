@@ -1,8 +1,8 @@
 # mybatis-expand
 
 该项目为基于spring boot和mybatis而开发的自动建表工具，通过项目中定义的注解来实现项目启动是扫描实体类中的注解来构建表结构，
-并通过mybatis执行DDL语句。并且可以通过Option来决定是否修改表或者创建表。目前该工具只支持PostgreSQL数据库，并且对于修改表
-结构只限定于判断列名和类型。需要注意的是，该项目依赖spring boot中定义的application.yml中定义的spring:datasource:
+并通过mybatis执行DDL语句。并且可以通过Option来决定是否修改表或者创建表。目前该工具只支持PostgreSQL/mysql等常见数据库，并
+且对于修改表结构目前只限定于判断列名和类型。需要注意的是，该项目依赖spring boot中定义的数据源；
 
 注意：建表使用默认的sql格式，既表名、schema和列都采用小写（对于列名，可能实体中为驼峰，该项目会自动将其转成“_小写"）。
 
