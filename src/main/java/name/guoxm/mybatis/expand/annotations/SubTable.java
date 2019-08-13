@@ -3,7 +3,7 @@ package name.guoxm.mybatis.expand.annotations;
 import java.lang.annotation.*;
 
 /**
- * 子表注解
+ * 关联子表注解
  * Created on 2019/7/25.
  * @author guoxm
  */

@@ -4,7 +4,7 @@ import com.google.common.base.CaseFormat;
 import lombok.Data;
 
 /**
- * 用于存放创建表的字段信息
+ * 存放创建表的字段信息
  * Created on 2019/5/20
  * @author guoxm
  */

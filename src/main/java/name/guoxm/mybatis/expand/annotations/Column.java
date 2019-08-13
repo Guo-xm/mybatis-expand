@@ -16,7 +16,7 @@ public @interface Column {
 
     String name() default ""; // 字段名
 
-    String type() default "";// 字段类型
+    String type() default ""; // 字段类型
 
     int length() default 255; // 字段长度，默认是255
 

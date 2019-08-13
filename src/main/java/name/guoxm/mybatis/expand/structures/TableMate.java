@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * 用于记录解析出来的结构
+ * 保存解析出来的结构
  * Created on 2019/5/21.
  * @author guoxm
  */

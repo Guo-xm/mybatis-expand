@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * SQL提供类，用于提供DDL语句
+ * 目前就暂时提供 Create Table 语句和 Alter Table 语句
  * Created on 2019/7/15.
  * @author guoxm
  */

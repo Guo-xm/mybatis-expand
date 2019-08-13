@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * 创建表映射文件
+ * 操作映射文件
+ * 主要就是定义查询、删除、创建、修改等操作映射
  * Created on 2019/5/20.
  * @author guoxm
  */
