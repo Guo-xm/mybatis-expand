@@ -8,7 +8,7 @@ import name.guoxm.mybatis.expand.mappers.TableMapper;
 import name.guoxm.mybatis.expand.options.Option;
 import name.guoxm.mybatis.expand.structures.ColumnMate;
 import name.guoxm.mybatis.expand.structures.TableMate;
-import name.guoxm.mybatis.expand.tools.ClassTool;
+import name.guoxm.mybatis.expand.tools.FindAnnotationClassUtil;
 import name.guoxm.mybatis.expand.types.TypeConvert;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -46,7 +47,7 @@ public class ExpandClassScanner {
         this.dbDriver = dbDriver;
     }
 
-    void doScanner(List<String> packages) throws ExpandException {
+    void doScanner(List<String> packages) throws ExpandException, IOException, ClassNotFoundException {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         this.tableMapper = sqlSession.getMapper(TableMapper.class);
         for (String _package : packages)
@@ -56,9 +57,9 @@ public class ExpandClassScanner {
         sqlSession.close();
     }
 
-    private void createTable(String _package) throws ExpandException {
+    private void createTable(String _package) throws ExpandException, IOException, ClassNotFoundException {
         Map<String, Integer> type2Length = getType2Length();
-        Set<Class<?>> classes = ClassTool.getClasses(_package, true);
+        Set<Class<?>> classes = FindAnnotationClassUtil.findBeanDefinition(_package, true, Table.class);
 
         List<TableMate> newTables = new ArrayList<>(); // 新增的表
         List<TableMate> updateTables = new ArrayList<>(); // 新增字段的表
@@ -75,8 +76,6 @@ public class ExpandClassScanner {
     private void buildTablesConstruct(Set<Class<?>> classes, Map<String, Integer> type2Length, List<TableMate> newTables, List<TableMate> updateTables) throws ExpandException {
         for (Class<?> c : classes) {
             Table table = c.getAnnotation(Table.class);
-            if (table == null)
-                continue;
 
             List<ColumnMate> allFields = new ArrayList<>(); // 该类所有的字段
             List<ColumnMate> newFields = new ArrayList<>(); // 该类新增的字段

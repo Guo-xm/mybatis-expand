@@ -34,12 +34,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -63,6 +65,7 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.2.5</version>
+            <scope>provided</scope>
         </dependency>
         <!-- google的common -->
         <dependency>
@@ -70,13 +73,7 @@
             <artifactId>guava</artifactId>
             <version>28.0-jre</version>
         </dependency>
-
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-
+        <!-- 依赖阿里德鲁伊数据源-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>

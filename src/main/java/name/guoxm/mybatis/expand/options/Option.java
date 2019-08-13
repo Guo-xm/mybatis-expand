@@ -8,4 +8,5 @@ package name.guoxm.mybatis.expand.options;
 public enum Option {
     CREATE,
     UPDATE,
+    NONE,
 }

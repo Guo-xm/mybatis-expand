@@ -3,6 +3,7 @@ package name.guoxm.mybatis.expand;
 import com.alibaba.druid.pool.DruidDataSource;
 import name.guoxm.mybatis.expand.annotations.ExpandScan;
 import name.guoxm.mybatis.expand.mappers.TableMapper;
+import name.guoxm.mybatis.expand.options.Option;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -16,6 +17,7 @@ import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,12 +41,13 @@ public class ExpandScanSelector implements ImportBeanDefinitionRegistrar, Enviro
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
-        SqlSessionFactory sqlSessionFactory = getSessionFactory();
-
         // 获取某某注解的原数据，从中可以获取注解修饰的具体类信息
         AnnotationAttributes annotationAttributes = AnnotationAttributes.fromMap(annotationMetadata.getAnnotationAttributes(ExpandScan.class.getName()));
-        //
-        ExpandClassScanner scanner = new ExpandClassScanner(sqlSessionFactory);
+
+        if (annotationAttributes.getEnum("auto") == Option.NONE) // 如果配置为NONE，说明不用扫描了
+            return;
+
+        ExpandClassScanner scanner = new ExpandClassScanner(getSessionFactory());
 
         List<String> basePackages = new ArrayList<>();
 
@@ -53,7 +56,13 @@ public class ExpandScanSelector implements ImportBeanDefinitionRegistrar, Enviro
         buildPackages(values, basePackages);
         scanner.setDBDriver(this.environment.getProperty("spring.datasource.driver-class-name"));
         scanner.setAuto(annotationAttributes.getEnum("auto"));
-        scanner.doScanner(basePackages);
+        try {
+            scanner.doScanner(basePackages);
+        } catch(IOException e) {
+            e.printStackTrace();
+        } catch(ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private SqlSessionFactory getSessionFactory() {
